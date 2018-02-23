@@ -34,26 +34,26 @@ class Php {
     public function getScope(){
 
         $scope = str_replace('.php', '', $this->getFile());
-		$scope = explode('/', $scope);
+        $scope = explode('/', $scope);
         $scope = end($scope);
 
         return $scope;
     }
 
-	/**
-	 * Read PHP file and return it texts content
-	 * @return array
-	 */
-	public function retrieveTexts(){
+    /**
+     * Read PHP file and return it texts content
+     * @return array
+     */
+    public function retrieveTexts(){
 
         $texts = include $this->getFile();
 
         if( !is_array($texts) ){
             $message = $file. ' is not a valid PHP translator file.';
-			throw new \Exception($message);
+            throw new \Exception($message);
         }
 
-		return $texts;
-	}
+        return $texts;
+    }
 
 }
