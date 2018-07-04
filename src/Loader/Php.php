@@ -2,6 +2,8 @@
 
 namespace Orbital\I18n\Loader;
 
+use \Exception;
+
 class Php {
 
     /**
@@ -42,6 +44,7 @@ class Php {
 
     /**
      * Read PHP file and return it texts content
+     * @throws Exception
      * @return array
      */
     public function retrieveTexts(){
@@ -50,7 +53,7 @@ class Php {
 
         if( !is_array($texts) ){
             $message = $file. ' is not a valid PHP translator file.';
-            throw new \Exception($message);
+            throw new Exception($message);
         }
 
         return $texts;

@@ -2,6 +2,8 @@
 
 namespace Orbital\I18n\Loader;
 
+use \Exception;
+
 class Mo {
 
     /**
@@ -54,6 +56,7 @@ class Mo {
 
     /**
      * Read MO file and return it texts content
+     * @throws Exception
      * @return array
      */
     public function retrieveTexts(){
@@ -65,7 +68,7 @@ class Mo {
 
         if( FALSE === $this->resource ){
             $message = 'Could not open file '. $file. ' for reading.';
-            throw new \Exception($message);
+            throw new Exception($message);
         }
 
         // Verify magic number
@@ -78,7 +81,7 @@ class Mo {
         }else{
             fclose($this->resource);
             $message = $file. ' is not a valid gettext MO file.';
-            throw new \Exception($message);
+            throw new Exception($message);
         }
 
         // Verify major revision (only 0 and 1 supported)
