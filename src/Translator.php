@@ -67,7 +67,7 @@ abstract class Translator {
             $language = self::getLanguage();
         }
 
-        $directory = APP. 'I18n'. DS. $language;
+        $directory = BASE. 'i18n'. DS. $language;
 
         // Load PHP files
         foreach( glob($directory. DS. '*.php') as $file ){
