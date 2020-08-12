@@ -1,7 +1,7 @@
 {
     "name": "orbital-framework/i18n",
     "description": "i18n translation for Orbital Framework",
-    "keywords": ["orbital-framework","i18n","translations"],
+    "keywords": ["orbital-framework","i18n","translation"],
     "homepage": "https://github.com/orbital-framework/i18n",
     "license": "MIT",
     "require": {
