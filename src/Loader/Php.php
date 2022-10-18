@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Orbital\I18n\Loader;
 
@@ -17,7 +18,7 @@ class Php {
      * @param string $file
      * @return void
      */
-    public function setFile($file){
+    public function setFile(string $file): void {
         $this->file = $file;
     }
 
@@ -25,7 +26,7 @@ class Php {
      * Retrieve file source
      * @return string
      */
-    public function getFile(){
+    public function getFile(): string {
         return $this->file;
     }
 
@@ -33,7 +34,7 @@ class Php {
      * Retrieve scope for file
      * @return string
      */
-    public function getScope(){
+    public function getScope(): string {
 
         $scope = str_replace('.php', '', $this->getFile());
         $scope = explode('/', $scope);
@@ -47,7 +48,7 @@ class Php {
      * @throws Exception
      * @return array
      */
-    public function retrieveTexts(){
+    public function retrieveTexts(): array {
 
         $texts = include $this->getFile();
 

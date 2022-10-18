@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Orbital\I18n\Loader;
 
@@ -29,7 +30,7 @@ class Mo {
      * @param string $file
      * @return void
      */
-    public function setFile($file){
+    public function setFile(string $file): void {
         $this->file = $file;
     }
 
@@ -37,7 +38,7 @@ class Mo {
      * Retrieve file source
      * @return string
      */
-    public function getFile(){
+    public function getFile(): string {
         return $this->file;
     }
 
@@ -45,7 +46,7 @@ class Mo {
      * Retrieve scope for file
      * @return string
      */
-    public function getScope(){
+    public function getScope(): string {
 
         $scope = str_replace('.mo', '', $this->getFile());
         $scope = explode('/', $scope);
@@ -59,14 +60,14 @@ class Mo {
      * @throws Exception
      * @return array
      */
-    public function retrieveTexts(){
+    public function retrieveTexts(): array {
 
         $texts = array();
         $file = $this->getFile();
 
         $this->resource = fopen($file, 'rb');
 
-        if( FALSE === $this->resource ){
+        if( false === $this->resource ){
             $message = 'Could not open file '. $file. ' for reading.';
             throw new Exception($message);
         }
@@ -74,10 +75,10 @@ class Mo {
         // Verify magic number
         $magic = fread($this->resource, 4);
 
-        if( $magic == "\x95\x04\x12\xde" ){
-            $this->littleEndian = FALSE;
-        }elseif( $magic == "\xde\x12\x04\x95" ){
-            $this->littleEndian = TRUE;
+        if( $magic === "\x95\x04\x12\xde" ){
+            $this->littleEndian = false;
+        }elseif( $magic === "\xde\x12\x04\x95" ){
+            $this->littleEndian = true;
         }else{
             fclose($this->resource);
             $message = $file. ' is not a valid gettext MO file.';
@@ -90,7 +91,6 @@ class Mo {
 
         if( $majorRevision !== 0
             AND $majorRevision !== 1 ){
-
             fclose($this->resource);
             $message = $file. ' has an unknown major revision.';
             throw new Exception($message);
@@ -164,7 +164,7 @@ class Mo {
      * Read a single integer from resource file
      * @return int
      */
-    protected function readResourceInteger(){
+    protected function readResourceInteger(): int {
 
         if( $this->littleEndian ){
             $result = unpack('Vint', fread($this->resource, 4));
@@ -178,9 +178,9 @@ class Mo {
     /**
      * Read an integer list from resource file
      * @param int $number
-     * @return int
+     * @return array
      */
-    protected function readResourceIntegerList($number){
+    protected function readResourceIntegerList(int $number): array {
 
         if( $this->littleEndian ){
             return unpack('V' . $number, fread($this->resource, 4 * $number));

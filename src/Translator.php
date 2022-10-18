@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Orbital\I18n;
 
@@ -26,7 +27,7 @@ abstract class Translator {
      * Retrieve language
      * @return string
      */
-    public static function getLanguage(){
+    public static function getLanguage(): string {
         return self::$language;
     }
 
@@ -34,7 +35,7 @@ abstract class Translator {
      * Retrieve language scope
      * @return string
      */
-    public static function getScope(){
+    public static function getScope(): string {
         return self::$scope;
     }
 
@@ -43,7 +44,7 @@ abstract class Translator {
      * @param string $code
      * @return void
      */
-    public static function setLanguage($code){
+    public static function setLanguage(string $code): void {
         self::$language = $code;
     }
 
@@ -52,7 +53,7 @@ abstract class Translator {
      * @param string $scope
      * @return void
      */
-    public static function setScope($scope){
+    public static function setScope(string $scope): void {
         self::$scope = $scope;
     }
 
@@ -61,7 +62,7 @@ abstract class Translator {
      * @param string $language
      * @return void
      */
-    public static function load($language = NULL){
+    public static function load(string $language = null): void {
 
         if( is_null($language) ){
             $language = self::getLanguage();
@@ -116,7 +117,7 @@ abstract class Translator {
      * @param array $texts
      * @return void
      */
-    public static function add($language, $scope, $texts = array()){
+    public static function add(string $language, string $scope, array $texts = array()): void {
 
         if( !isset(self::$texts[$language]) ){
             self::$texts[$language] = array();
@@ -141,7 +142,7 @@ abstract class Translator {
      * @param string $language
      * @return string
      */
-    public static function translate($string, $placeholders = array(), $scope = NULL, $language = NULL){
+    public static function translate(string $string, array $placeholders = array(), string $scope = null, string $language = null): string {
 
         if( is_null($language) ){
             $language = self::getLanguage();
@@ -177,11 +178,11 @@ abstract class Translator {
      * Translate string into language and return it
      * @param string $string
      * @param array $placeholders
-     * @param mixed $scope
-     * @param mixed $language
+     * @param string $scope
+     * @param string $language
      * @return string
      */
-    public static function __($string, $placeholders = array(), $scope = NULL, $language = NULL){
+    public static function __(string $string, array $placeholders = array(), string $scope = null, string $language = null): string {
         return self::translate($string, $placeholders, $scope, $language);
     }
 
@@ -189,11 +190,11 @@ abstract class Translator {
      * Translate string into language and print it
      * @param string $string
      * @param array $placeholders
-     * @param mixed $scope
-     * @param mixed $language
+     * @param string $scope
+     * @param string $language
      * @return void
      */
-    public static function _e($string, $placeholders = array(), $scope = NULL, $language = NULL){
+    public static function _e(string $string, array $placeholders = array(), string $scope = null, string $language = null): void {
         echo self::translate($string, $placeholders, $scope, $language);
     }
 
