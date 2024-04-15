@@ -167,7 +167,7 @@ abstract class Translator {
         if( is_array($placeholders)
             AND $placeholders ){
             foreach( $placeholders as $key => $value ){
-                $text = str_replace($key, $value, $text);
+                $text = str_replace($key, (string) $value, $text);
             }
         }
 
